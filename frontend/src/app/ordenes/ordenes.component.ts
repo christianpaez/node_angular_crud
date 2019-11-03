@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../api.service';
-import { Product } from '../products';
+import { Orden } from '../ordenes';
 
 @Component({
   selector: 'app-ordenes',
@@ -8,17 +8,16 @@ import { Product } from '../products';
   styleUrls: ['./ordenes.component.scss']
 })
 export class OrdenesComponent implements OnInit {
-  displayedColumns: string[] = ['prod_name', 'prod_price', 'valor', 'fecha_de_creacion'];
-  data: Product[] = [];
+  displayedColumns: string[] = ['canal', 'valor', 'estado', 'createdAt'];
+  data: Orden[] = [];
   isLoadingResults = true;
 
   constructor(private api: ApiService) { }
 
   ngOnInit() {
-    this.api.getProducts()
+    this.api.getOrdenes()
       .subscribe((res: any) => {
         this.data = res;
-        console.log(this.data);
         this.isLoadingResults = false;
       }, err => {
         console.log(err);

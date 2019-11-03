@@ -44,7 +44,7 @@ export class ProductEditComponent implements OnInit {
   }
 
   getProduct(id: any){
-    this.api.getProduct(id)
+    /* this.api.getProduct(id)
     .subscribe((data: any)=>{
       console.log(data)
       data._id = this._id;
@@ -53,12 +53,12 @@ export class ProductEditComponent implements OnInit {
         prod_desc : data.prod_desc,
         prod_price: data.prod_price
       })
-    })
+    }) */
   }
 
   onFormSubmit(){
     this.isLoadingResults = true;
-    this.api.updateProduct(this._id, this.productForm.value)
+    /* this.api.updateProduct(this._id, this.productForm.value)
     .subscribe((res: any)=>{
       const id = res._id;
       this.isLoadingResults = false;
@@ -66,7 +66,7 @@ export class ProductEditComponent implements OnInit {
     }, (err) => {
       console.log(err)
       this.isLoadingResults = false;
-    })
+    }) */
   }
 
   productDetails(){

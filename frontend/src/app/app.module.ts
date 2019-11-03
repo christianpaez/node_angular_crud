@@ -11,7 +11,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
   MatInputModule,
+  MatSelectModule,
   MatPaginatorModule,
+  MatDividerModule,
   MatProgressSpinnerModule,
   MatSortModule,
   MatTableModule,
@@ -20,6 +22,8 @@ import {
   MatCardModule,
   MatFormFieldModule } from "@angular/material";
 import { OrdenesComponent } from './ordenes/ordenes.component';
+import { OrdenesCrearComponent } from './ordenes-crear/ordenes-crear.component';
+import { OrdenesDetalleComponent } from './ordenes-detalle/ordenes-detalle.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +32,9 @@ import { OrdenesComponent } from './ordenes/ordenes.component';
     ProductEditComponent,
     ProductAddComponent,
     ProductDetailComponent,
-    OrdenesComponent
+    OrdenesComponent,
+    OrdenesCrearComponent,
+    OrdenesDetalleComponent
   ],
   imports: [
     BrowserModule,
@@ -38,9 +44,11 @@ import { OrdenesComponent } from './ordenes/ordenes.component';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     MatInputModule,
+    MatSelectModule,
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
+    MatDividerModule, 
     MatProgressSpinnerModule,
     MatIconModule,
     MatButtonModule,

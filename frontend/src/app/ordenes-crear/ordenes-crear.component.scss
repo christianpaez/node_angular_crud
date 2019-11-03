@@ -9,10 +9,6 @@
     max-height: 400px;
     overflow: auto;
   }
-
-  .button-row {
-    margin: 10px 0;
-  }
   
   table {
     width: 100%;
@@ -50,6 +46,14 @@
   .mat-flat-button {
     margin: 5px;
   }
+
+  .button-row {
+    margin: 10px 0;
+  }
   
+  .form-title {
+    margin: 10px 10px;
+  }
+
   .mat-row {
     cursor:pointer;}

@@ -4,38 +4,38 @@
       <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
     </div>
     <div class="button-row">
-      <a mat-flat-button color="primary" [routerLink]="['/product-add']"><mat-icon>add</mat-icon></a>
+      <a mat-flat-button color="primary" [routerLink]="['/ordenes-crear']"><!-- <mat-icon>add</mat-icon> -->Nueva Orden</a>
     </div>
     <div class="mat-elevation-z8">
       <table mat-table [dataSource]="data" class="example-table"
-             matSort matSortActive="prod_name" matSortDisableClear matSortDirection="asc">
+             matSort matSortActive="canal" matSortDisableClear matSortDirection="asc">
   
-        <!-- Product Name Column -->
-        <ng-container matColumnDef="prod_name">
-          <th mat-header-cell *matHeaderCellDef>Product Name</th>
-          <td mat-cell *matCellDef="let row">{{row.prod_name}}</td>
+        <!-- Columna Canal -->
+        <ng-container matColumnDef="canal">
+          <th mat-header-cell *matHeaderCellDef>Canal</th>
+          <td mat-cell *matCellDef="let row">{{row.canal}}</td>
         </ng-container>
   
-        <!-- Product Price Column -->
-        <ng-container matColumnDef="prod_price">
-          <th mat-header-cell *matHeaderCellDef>Product Price</th>
-          <td mat-cell *matCellDef="let row">$ {{row.prod_price}}</td>
+        <!-- Columna Valor -->
+        <ng-container matColumnDef="valor">
+          <th mat-header-cell *matHeaderCellDef>Valor</th>
+          <td mat-cell *matCellDef="let row">$ {{row.valor}}</td>
         </ng-container>
 
-        <!-- Product Price Column -->
-        <ng-container matColumnDef="valor">
-            <th mat-header-cell *matHeaderCellDef>Valor</th>
-            <td mat-cell *matCellDef="let row">$ {{row.valor}}</td>
+        <!-- Columna Estado -->
+        <ng-container matColumnDef="estado">
+            <th mat-header-cell *matHeaderCellDef>Estado</th>
+            <td mat-cell *matCellDef="let row">{{row.estado}}</td>
           </ng-container>
 
-          <!-- Product Price Column -->
-        <ng-container matColumnDef="fecha_de_creacion">
+          <!-- Columna Fecha -->
+        <ng-container matColumnDef="createdAt">
             <th mat-header-cell *matHeaderCellDef>Fecha de Creación</th>
-            <td mat-cell *matCellDef="let row">$ {{row.fecha_de_creacion}}</td>
+            <td mat-cell *matCellDef="let row">{{row.createdAt}}</td>
           </ng-container>
   
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;" [routerLink]="['/product-details/', row._id]"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;" [routerLink]="['/ordenes-detalle/', row._id]"></tr>
       </table>
     </div>
   </div>

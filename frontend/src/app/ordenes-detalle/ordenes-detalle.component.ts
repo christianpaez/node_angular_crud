@@ -4,38 +4,39 @@ import { ApiService } from '../api.service';
 import { Orden } from '../ordenes';
 
 @Component({
-  selector: 'app-product-detail',
-  templateUrl: './product-detail.component.html',
-  styleUrls: ['./product-detail.component.scss']
+  selector: 'app-ordenes-detalle',
+  templateUrl: './ordenes-detalle.component.html',
+  styleUrls: ['./ordenes-detalle.component.scss']
 })
-export class ProductDetailComponent implements OnInit {
-  /* product: Orden = {
+export class OrdenesDetalleComponent implements OnInit {
+
+  orden: any = {
     _id: '',
-    prod_name: '',
-    prod_desc: '',
-    prod_price: null,
-    updated_at: null
-} */
+    canal: '',
+    estado: 'Reservada',
+    tipo_de_entrega: 'Estandar',
+    tipo_de_envio: '',
+    valor: null,
+    descuento: null, 
+    items: [],
+    createdAt: null
+}
 
 isLoadingResults= true;
-
   constructor(private api: ApiService, private router: Router, 
     private route: ActivatedRoute) { }
 
   ngOnInit() {
-    console.log(this.route)
-/*     this.getProductDetails(this.route.snapshot.params['id']); */
-    
+        this.getOrdenDetails(this.route.snapshot.params['id']);
   }
 
-  /* getProductDetails(id: any){
-    this.api.getProduct(id)
+  getOrdenDetails(id: any){
+    this.api.getOrden(id)
     .subscribe((data: any)=>{
-      this.product = data
-      console.log(this.product);
+      this.orden = data
       this.isLoadingResults = false;
     })
-  } */
+  }
 
   /* deleteProduct(id: any){
     this.isLoadingResults = true;
@@ -48,5 +49,4 @@ isLoadingResults= true;
       this.isLoadingResults = false;
     }))
   } */
-
 }

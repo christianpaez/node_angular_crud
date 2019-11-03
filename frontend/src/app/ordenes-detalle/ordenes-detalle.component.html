@@ -1,0 +1,36 @@
+<div class="example-container mat-elevation-z8">
+  <div class="example-loading-shade" *ngIf="isLoadingResults">
+    <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+  </div>
+  <div class="button-row">
+    <a mat-flat-button color="primary" [routerLink]="['/ordenes']">Ir a ordenes</a>
+  </div>
+  <mat-card class="example-card">
+    <mat-card-header>
+      <mat-card-title>
+        <h2>Detalle de Orden</h2>
+      </mat-card-title>
+      <mat-card-subtitle>Estado: {{orden.estado}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <dl>
+        <dt>Canal de orden:</dt>
+        <dd>{{orden.canal}}</dd>
+        <dt>Valor de orden:</dt>
+        <dd>${{orden.valor}}</dd>
+        <dt>Descuento de orden:</dt>
+        <dd>{{orden.descuento}}</dd>
+        <dt>Tipo de entrega:</dt>
+        <dd>{{orden.tipo_de_entrega}}</dd>
+        <dt>Tipo de envío:</dt>
+        <dd>{{orden.tipo_de_envio}}</dd>
+        <dt>Fecha de Creación</dt>
+        <dd>{{orden.createdAt | date}}</dd>
+      </dl>
+    </mat-card-content>
+    <mat-card-actions>
+      <!--                         <a mat-flat-button color="primary" [routerLink]="['/product-edit', product._id]"><mat-icon>edit</mat-icon></a> -->
+      <!--                         <a mat-flat-button color="warn" (click)="deleteProduct(product._id)"><mat-icon>delete</mat-icon></a> -->
+    </mat-card-actions>
+  </mat-card>
+</div>
