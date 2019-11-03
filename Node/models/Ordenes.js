@@ -24,7 +24,7 @@ var OrderSchema = new mongoose.Schema({
   },
   tipo_de_envio: {
     type: String,
-    enum: ['Entrega en tienda', 'Entrega en Domicilio']
+    enum: ['Entrega en tienda', 'Entrega en domicilio']
   },
   items: [ItemSchema]
 },{
