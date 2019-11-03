@@ -24,7 +24,7 @@ router.post('/', function(req, res, next) {
     if (err) {
       res.json(err)
       return next(err);}
-    res.json(orden);
+    res.status(201).json(orden);
   });
 });
 
@@ -38,7 +38,7 @@ router.put('/:id', function(req, res, next) {
     {
       valor: valor,
       estado: estado }, {new: true, runValidators: true})
-    .then((order)=>{res.json(order)})
+    .then((order)=>{res.status(200).json(order)})
     .catch((error)=>res.status(400).json(error))
 });
 
@@ -57,9 +57,8 @@ router.post('/:id/items',function(req, res, next) {
           orden.items.push(req.body);
           orden.save()
           .then((orden) => {
-             res.statusCode = 200;
              res.setHeader('Content-Type', 'application/json');
-             res.json(orden);
+             res.status(201).json(orden);
           }, (err) => next(err));
       }
       else {
