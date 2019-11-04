@@ -1,0 +1,38 @@
+<div class="example-container mat-elevation-z8">
+  <div class="example-loading-shade" *ngIf="isLoadingResults">
+    <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+  </div>
+  <div class="button-row">
+    <a mat-flat-button color="primary" (click)="ordenDetails()">
+      <mat-icon>info</mat-icon> Ir a detalle
+    </a>
+  </div>
+  <mat-card class="example-card">
+    <form [formGroup]="ordenForm" (ngSubmit)="onFormSubmit()">
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Valor de orden" formControlName="valor" [errorStateMatcher]="matcher">
+        <mat-error>
+          <span *ngIf="!ordenForm.get('valor').valid && ordenForm.get('valor').touched">Ingresar valor de la orden, debe ser un Número</span>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <mat-select placeholder="Estado" formControlName="estado" [errorStateMatcher]="matcher">
+          <mat-option value="Reservada">Reservada</mat-option>
+          <mat-option value="Pendiente">Pendiente</mat-option>
+          <mat-option value="En tránsito">En tránsito</mat-option>
+          <mat-option value="Lista para recoger">Lista para recoger</mat-option>
+          <mat-option value="Cerrada">Cerrada</mat-option>
+          <mat-option value="Cancelada">Cancelada</mat-option>
+        </mat-select>
+        <mat-error>
+          <span *ngIf="!ordenForm.get('estado').valid && ordenForm.get('estado').touched">Ingrese estado de la Orden</span>
+        </mat-error>
+     </mat-form-field>
+      <div class="button-row">
+        <button type="submit" [disabled]="!ordenForm.valid" mat-flat-button color="primary">
+          <mat-icon>save</mat-icon>
+        </button>
+      </div>
+    </form>
+  </mat-card>
+</div>

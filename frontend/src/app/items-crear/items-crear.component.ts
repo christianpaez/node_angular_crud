@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { ApiService } from '../api.service';
 import { FormControl, FormGroupDirective, FormBuilder, 
   FormGroup, NgForm, Validators } from '@angular/forms';
@@ -13,40 +13,39 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 }
 
 @Component({
-  selector: 'app-ordenes-crear',
-  templateUrl: './ordenes-crear.component.html',
-  styleUrls: ['./ordenes-crear.component.scss']
+  selector: 'app-items-crear',
+  templateUrl: './items-crear.component.html',
+  styleUrls: ['./items-crear.component.scss']
 })
-export class OrdenesCrearComponent implements OnInit {
+export class ItemsCrearComponent implements OnInit {
 
   isLoadingResults = false;
-  ordenForm: FormGroup;
-  canal = '';
-  estado = '';
-  valor: number = null; 
-  descuento: number = null;
-  tipo_de_entrega = '';
-  tipo_de_envio = '';
+  _id: string = '';
+  itemForm: FormGroup;
+  sku = '';
+  nombre = '';
+  cantidad: number = null; 
+  precio: number = null;
+  codigo_de_barra: number = null;
   matcher = new MyErrorStateMatcher();
 
-  constructor(private router: Router, private api: ApiService, 
+  constructor(private route: ActivatedRoute, private router: Router, private api: ApiService, 
     private formBuilder: FormBuilder) { }
 
   ngOnInit() {
+    this._id = this.route.snapshot.params['id']
     const numberReg = /^\d+$/;
-    this.ordenForm = this.formBuilder.group({
-      'canal' : [null, Validators.required],
-      'estado' : [null, Validators.required],
-      'valor' : [null, [Validators.required,Validators.pattern(numberReg)]],
-      'descuento' : [null, [Validators.required, Validators.pattern(numberReg)]],
-      'tipo_de_entrega' : [null, Validators.required],
-      'tipo_de_envio' : [null, Validators.required],
+    this.itemForm = this.formBuilder.group({
+      'sku' : [null, Validators.required],
+      'nombre' : [null, Validators.required],
+      'cantidad' : [null, [Validators.required,Validators.pattern(numberReg)]],
+      'precio' : [null, [Validators.required, Validators.pattern(numberReg)]],
+      'codigo_de_barra' : [null, [Validators.required, Validators.pattern(numberReg)]],
     });
   }
-
   onFormSubmit() {
     this.isLoadingResults = true;
-    this.api.addOrden(this.ordenForm.value)
+    this.api.addItem(this.itemForm.value, this._id)
       .subscribe((res: any) => {
           const id = res._id;
           this.isLoadingResults = false;

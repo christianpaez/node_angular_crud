@@ -3,6 +3,7 @@ import { Observable, of, throwError } from 'rxjs';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { catchError, tap, map } from 'rxjs/operators';
 import { Orden } from './ordenes';
+import { Item } from './items';
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
 };
@@ -30,14 +31,14 @@ export class ApiService {
   getOrdenes(): Observable<Orden[]> {
     return this.http.get<Orden[]>(`${apiUrl}/ordenes`)
       .pipe(
-        tap(orden => console.log('Fetched Ordenes')),
+        tap(/* orden => console.log('Fetched Ordenes') */),
         catchError(this.handleError('getOrdenes', []))
       );
     }
 
     addOrden(orden: Orden): Observable<Orden> {
       return this.http.post<Orden>(`${apiUrl}/ordenes`, orden, httpOptions).pipe(
-        tap((orden: Orden) => console.log(`Creada orden id: =${orden._id}`)),
+        tap(/* (orden: Orden) => console.log(`Creada orden id: =${orden._id}`) */),
         catchError(this.handleError<Orden>('addOrden'))
       );
     }
@@ -45,33 +46,31 @@ export class ApiService {
   getOrden(id: string): Observable<Orden> {
     const url = `${apiUrl}/ordenes/${id}`;
     return this.http.get<Orden>(url).pipe(
-      tap(_ => console.log(`Cargada orden id: ${id}`)),
+      tap(/* _id => console.log(`Cargada orden id: ${id}`) */),
       catchError(this.handleError<Orden>(`getOrden id=${id}`))
     );
   }
-  
-  /* getProduct(id: number): Observable<Product> {
-    const url = `${apiUrl}/${id}`;
-    return this.http.get<Product>(url).pipe(
-      tap(_ => console.log(`fetched product id=${id}`)),
-      catchError(this.handleError<Product>(`getProduct id=${id}`))
+
+  updateOrden(id: any, orden: Orden): Observable<any> {
+    const url = `${apiUrl}/ordenes/${id}`;
+    return this.http.put(url, orden, httpOptions).pipe(
+      tap(/* _ => console.log(`Orden actualizada id: ${id}`) */),
+      catchError(this.handleError<any>('updateOrden'))
     );
-  } */
-  
-  /* updateProduct(id: any, product: Product): Observable<any> {
-    const url = `${apiUrl}/${id}`;
-    return this.http.put(url, product, httpOptions).pipe(
-      tap(_ => console.log(`updated product id=${id}`)),
-      catchError(this.handleError<any>('updateProduct'))
+  }
+
+  addItem(item: Item, id): Observable<Item> {
+    return this.http.post<Item>(`${apiUrl}/ordenes/${id}/items`, item, httpOptions).pipe(
+      tap((orden: any) => console.log(`Creado item para orden id: =${orden._id}`)),
+      catchError(this.handleError<Orden>('addItem'))
     );
-  } */
-  
-  /* deleteProduct(id: any): Observable<Product> {
-    const url = `${apiUrl}/${id}`;
-    return this.http.delete<Product>(url, httpOptions).pipe(
-      tap(_ => console.log(`deleted product id=${id}`)),
-      catchError(this.handleError<Product>('deleteProduct'))
+  }
+  deleteItem(idOrden: string, idItem: string): Observable<Item> {
+    const url = `${apiUrl}/ordenes/${idOrden}/items/${idItem}`;
+    return this.http.delete<Item>(url, httpOptions).pipe(
+      tap(/* id => console.log(`Eliminado Ítem id: ${idItem}`) */),
+      catchError(this.handleError<Item>('deleteItem'))
     );
-  } */
+  }
 
 }

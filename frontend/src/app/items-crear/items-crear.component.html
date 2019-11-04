@@ -1,0 +1,56 @@
+<div class="example-container mat-elevation-z8">
+  <div class="example-loading-shade" *ngIf="isLoadingResults">
+    <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+  </div>
+  <div class="button-row">
+    <a mat-flat-button color="primary" [routerLink]="['/ordenes-detalle', _id]">
+      <mat-icon>info</mat-icon>Ir a detalle de orden
+    </a>
+  </div>
+  <div class="form-title">
+    Crear Nuevo ítem
+  </div>
+  <mat-divider></mat-divider>
+  <mat-card class="example-card">
+    <form [formGroup]="itemForm" (ngSubmit)="onFormSubmit()">
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="SKU" formControlName="sku" [errorStateMatcher]="matcher">
+        <mat-error>
+          <span *ngIf="!itemForm.get('sku').valid && itemForm.get('sku').touched">Ingrese SKU de la Orden</span>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Nombre" formControlName="nombre" [errorStateMatcher]="matcher">
+        <mat-error>
+          <span *ngIf="!itemForm.get('nombre').valid && itemForm.get('nombre').touched">Ingrese nombre de la orden</span>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Cantidad" formControlName="cantidad" [errorStateMatcher]="matcher">
+        <mat-error>
+          <span *ngIf="!itemForm.get('cantidad').valid && itemForm.get('cantidad').touched">Ingrese cantidad de la orden</span>
+          <span *ngIf="!itemForm.get('cantidad').pattern"> Debe ser un número</span>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Precio" formControlName="precio" [errorStateMatcher]="matcher">
+        <mat-error>
+          <span *ngIf="!itemForm.get('precio').valid && itemForm.get('precio').touched">Ingrese precio de la orden</span>
+          <span *ngIf="!itemForm.get('precio').pattern"> Debe ser un número</span>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Código de barra" formControlName="codigo_de_barra" [errorStateMatcher]="matcher">
+        <mat-error>
+          <span *ngIf="!itemForm.get('codigo_de_barra').valid && itemForm.get('codigo_de_barra').touched">Ingrese código de barra</span>
+            <span *ngIf="!itemForm.get('codigo_de_barra').pattern"> Debe ser un número</span>
+        </mat-error>
+      </mat-form-field>
+      <div class="button-row">
+        <button type="submit" [disabled]="!itemForm.valid" mat-flat-button color="primary">
+          <mat-icon>save</mat-icon>
+        </button>
+      </div>
+    </form>
+  </mat-card>
+</div>

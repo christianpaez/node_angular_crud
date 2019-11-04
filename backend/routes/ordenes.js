@@ -33,7 +33,6 @@ router.put('/:id', function(req, res, next) {
   const id = req.params.id;
   const valor = req.body.valor;
   const estado = req.body.estado;
-  console.log(req.body)
   Orden.findByIdAndUpdate(id, 
     {
       valor: valor,

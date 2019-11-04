@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnInit, ChangeDetectorRef  } from '@angular/core';
+import { ActivatedRoute, Router, NavigationEnd  } from '@angular/router';
 import { ApiService } from '../api.service';
 import { Orden } from '../ordenes';
 
@@ -9,6 +9,11 @@ import { Orden } from '../ordenes';
   styleUrls: ['./ordenes-detalle.component.scss']
 })
 export class OrdenesDetalleComponent implements OnInit {
+
+  displayedColumns: string[] = ['sku', 'nombre', 'cantidad', 
+  'precio', 'codigo_de_barra', 'acciones'];
+
+  mySubscription: any;
 
   orden: any = {
     _id: '',
@@ -21,10 +26,22 @@ export class OrdenesDetalleComponent implements OnInit {
     items: [],
     createdAt: null
 }
+items: [] = []
 
 isLoadingResults= true;
   constructor(private api: ApiService, private router: Router, 
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute) {
+      this.router.routeReuseStrategy.shouldReuseRoute = function () {
+        return false;
+      };
+      
+      this.mySubscription = this.router.events.subscribe((event) => {
+        if (event instanceof NavigationEnd) {
+          // Trick the Router into believing it's last link wasn't previously loaded
+          this.router.navigated = false;
+        }
+      });
+     } 
 
   ngOnInit() {
         this.getOrdenDetails(this.route.snapshot.params['id']);
@@ -33,20 +50,30 @@ isLoadingResults= true;
   getOrdenDetails(id: any){
     this.api.getOrden(id)
     .subscribe((data: any)=>{
-      this.orden = data
+      if(data){
+        this.orden = data
+        this.items = data.items
+      }
       this.isLoadingResults = false;
     })
   }
 
-  /* deleteProduct(id: any){
+  deleteItem(idItem: string){
     this.isLoadingResults = true;
-    this.api.deleteProduct(id)
+    this.api.deleteItem(this.orden._id, idItem)
     .subscribe((res)=>{
       this.isLoadingResults = false;
-      this.router.navigate(['products']);
+      this.orden = res
+      this.router.navigateByUrl(`ordenes-detalle/${this.orden._id}`);
     }, (err =>{
       console.log(err);
       this.isLoadingResults = false;
     }))
-  } */
+  }
+
+  ngOnDestroy() {
+    if (this.mySubscription) {
+      this.mySubscription.unsubscribe();
+    }
+  }
 }

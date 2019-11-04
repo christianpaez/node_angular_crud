@@ -4,9 +4,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { OrdenesComponent } from './ordenes/ordenes.component';
 import { OrdenesCrearComponent } from './ordenes-crear/ordenes-crear.component';
 import { OrdenesDetalleComponent } from './ordenes-detalle/ordenes-detalle.component';
-import { ProductDetailComponent } from './product-detail/product-detail.component';
-import { ProductAddComponent } from './product-add/product-add.component';
-import { ProductEditComponent } from './product-edit/product-edit.component';
+import { OrdenesEditarComponent } from './ordenes-editar/ordenes-editar.component';
+import { ItemsCrearComponent } from './items-crear/items-crear.component';
 
 
 const routes: Routes = [
@@ -25,18 +24,16 @@ const routes: Routes = [
     component: OrdenesDetalleComponent,
     data: { title: 'Detalle de Orden' }
   },
-  
-  /* {
-    path: 'product-details/:id',
-    component: ProductDetailComponent,
-    data: { title: 'Product Details' }
-  },
-  
   {
-    path: 'product-edit/:id',
-    component: ProductEditComponent,
-    data: { title: 'Edit Product' }
-  }, */
+    path: 'ordenes-editar/:id',
+    component: OrdenesEditarComponent,
+    data: { title: 'Editar Orden' }
+  },
+  {
+    path: 'ordenes-detalle/:id/items-crear',
+    component: ItemsCrearComponent,
+    data: { title: 'Crear Ítem' }
+  },
   { path: '',
     redirectTo: '/ordenes',
     pathMatch: 'full'

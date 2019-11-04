@@ -3,9 +3,9 @@
     <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
   </div>
   <div class="button-row">
-    <a mat-flat-button color="primary" [routerLink]="['/ordenes']">Ir a ordenes</a>
+    <a mat-flat-button color="primary" [routerLink]="['/ordenes']"><mat-icon>list</mat-icon>Ir a ordenes</a>
   </div>
-  <mat-card class="example-card">
+  <mat-card  *ngIf ="!isLoadingResults" class="example-card">
     <mat-card-header>
       <mat-card-title>
         <h2>Detalle de Orden</h2>
@@ -14,23 +14,76 @@
     </mat-card-header>
     <mat-card-content>
       <dl>
-        <dt>Canal de orden:</dt>
+        <dt><b>Canal de orden:</b></dt>
         <dd>{{orden.canal}}</dd>
-        <dt>Valor de orden:</dt>
+        <dt><b>Valor de orden:</b></dt>
         <dd>${{orden.valor}}</dd>
-        <dt>Descuento de orden:</dt>
+        <dt><b>Descuento de orden:</b></dt>
         <dd>{{orden.descuento}}</dd>
-        <dt>Tipo de entrega:</dt>
+        <dt><b>Tipo de entrega:</b></dt>
         <dd>{{orden.tipo_de_entrega}}</dd>
-        <dt>Tipo de envío:</dt>
+        <dt><b>Tipo de envío:</b></dt>
         <dd>{{orden.tipo_de_envio}}</dd>
-        <dt>Fecha de Creación</dt>
+        <dt><b>Fecha de Creación</b></dt>
         <dd>{{orden.createdAt | date}}</dd>
       </dl>
     </mat-card-content>
     <mat-card-actions>
-      <!--                         <a mat-flat-button color="primary" [routerLink]="['/product-edit', product._id]"><mat-icon>edit</mat-icon></a> -->
-      <!--                         <a mat-flat-button color="warn" (click)="deleteProduct(product._id)"><mat-icon>delete</mat-icon></a> -->
+    <a mat-flat-button *ngIf ="!isLoadingResults" color="primary" [routerLink]="['/ordenes-editar', orden._id]"><mat-icon>edit</mat-icon> Editar</a>
     </mat-card-actions>
   </mat-card>
+    <div class="example-loading-shade"
+         *ngIf="isLoadingResults">
+      <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+    </div>
+    <div class="button-row">
+      <a mat-flat-button  *ngIf ="!isLoadingResults" color="primary" [routerLink]="['/ordenes-detalle', orden._id, 'items-crear']"><mat-icon>add</mat-icon>Nuevo ítem</a>
+    </div>
+    
+    <div class="mat-elevation-z8">
+      <table mat-table [dataSource]="items" class="example-table"
+             matSort matSortActive="sku" matSortDisableClear matSortDirection="asc">
+  
+        <!-- Columna sku -->
+        <ng-container matColumnDef="sku">
+          <th mat-header-cell *matHeaderCellDef>SKU</th>
+          <td mat-cell *matCellDef="let row">{{row.sku}}</td>
+        </ng-container>
+  
+        <!-- Columna Nombre -->
+        <ng-container matColumnDef="nombre">
+          <th mat-header-cell *matHeaderCellDef>Nombre</th>
+          <td mat-cell *matCellDef="let row">{{row.nombre}}</td>
+        </ng-container>
+
+        <!-- Columna Cantidad -->
+        <ng-container matColumnDef="cantidad">
+            <th mat-header-cell *matHeaderCellDef>Cantidad</th>
+            <td mat-cell *matCellDef="let row">{{row.cantidad}}</td>
+          </ng-container>
+
+          <!-- Columna Precio -->
+        <ng-container matColumnDef="precio">
+            <th mat-header-cell *matHeaderCellDef>Precio</th>
+            <td mat-cell *matCellDef="let row">${{row.precio}}</td>
+          </ng-container>
+  
+          <!-- Columna Codigo de barra -->
+        <ng-container matColumnDef="codigo_de_barra">
+          <th mat-header-cell *matHeaderCellDef>Código de Barra</th>
+          <td mat-cell *matCellDef="let row">{{row.codigo_de_barra}}</td>
+        </ng-container>
+          <!-- Columna Eliminar -->
+          <ng-container matColumnDef= "acciones">
+            <th mat-header-cell *matHeaderCellDef>Acciones</th>
+            <td mat-cell *matCellDef="let row">
+                   <a mat-flat-button color="warn"s
+                    (click)="deleteItem(row._id)">
+                    Eliminar<mat-icon>delete</mat-icon></a> 
+            </td>
+          </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;" [routerLink]="['/ordenes-detalle/', row._id]"></tr>
+      </table>
+    </div>
 </div>
