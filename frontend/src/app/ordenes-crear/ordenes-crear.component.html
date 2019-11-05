@@ -23,14 +23,14 @@
         <input matInput placeholder="Valor" formControlName="valor" [errorStateMatcher]="matcher">
         <mat-error>
           <span *ngIf="!ordenForm.get('valor').valid && ordenForm.get('valor').touched">Es requerido</span>
-          <span *ngIf="!ordenForm.get('valor').pattern"> Debe ser un número</span>
+          <span *ngIf="!ordenForm.get('valor')['pattern']"> Debe ser un número</span>
         </mat-error>
       </mat-form-field>
       <mat-form-field class="example-full-width">
         <input matInput placeholder="Descuento" formControlName="descuento" [errorStateMatcher]="matcher">
         <mat-error>
           <span *ngIf="!ordenForm.get('descuento').valid && ordenForm.get('descuento').touched">Es requerido</span>
-          <span *ngIf="!ordenForm.get('descuento').pattern"> Debe ser un número</span>
+          <span *ngIf="!ordenForm.get('descuento')['pattern']"> Debe ser un número</span>
         </mat-error>
       </mat-form-field>
       <mat-form-field class="example-full-width">

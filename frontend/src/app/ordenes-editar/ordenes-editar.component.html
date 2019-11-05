@@ -13,7 +13,9 @@
         <input matInput placeholder="Valor de orden" formControlName="valor" [errorStateMatcher]="matcher">
         <mat-error>
           <span *ngIf="!ordenForm.get('valor').valid && ordenForm.get('valor').touched">Ingresar valor de la orden, debe ser un Número</span>
+          <span *ngIf="!ordenForm.get('valor')['pattern']"> Debe ser un número</span>
         </mat-error>
+
       </mat-form-field>
       <mat-form-field class="example-full-width">
         <mat-select placeholder="Estado" formControlName="estado" [errorStateMatcher]="matcher">

@@ -1,3 +1,4 @@
+
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
@@ -5,6 +6,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var mongoose = require('mongoose');
 var cors = require('cors')
+
 
 var indexRouter = require('./routes/index');
 var healthRouter = require('./routes/health')
@@ -14,7 +16,18 @@ var app = express();
 
 
 const uri = "mongodb+srv://root:xpectrum@cluster0-kofzl.mongodb.net/test?retryWrites=true&w=majority"
-mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true,  useFindAndModify: false, useUnifiedTopology: true }
+mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true,  useFindAndModify: false, useUnifiedTopology: true,
+server: { 
+    socketOptions: { 
+      keepAlive: 300000, connectTimeoutMS: 30000 
+    } 
+  }, 
+  replset: { 
+    socketOptions: { 
+      keepAlive: 300000, 
+      connectTimeoutMS : 30000 
+    } 
+  }  }
 );
 const connection = mongoose.connection;
 connection.once('open', () => {
@@ -35,6 +48,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/health', healthRouter);
 app.use('/ordenes', OrdenesRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

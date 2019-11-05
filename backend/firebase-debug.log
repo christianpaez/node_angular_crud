@@ -1,0 +1,31 @@
+[debug] [2019-11-04T22:45:33.331Z] ----------------------------------------------------------------------
+[debug] [2019-11-04T22:45:33.335Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\HP\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2019-11-04T22:45:33.335Z] CLI Version:   7.6.2
+[debug] [2019-11-04T22:45:33.335Z] Platform:      win32
+[debug] [2019-11-04T22:45:33.335Z] Node Version:  v12.6.0
+[debug] [2019-11-04T22:45:33.336Z] Time:          Mon Nov 04 2019 17:45:33 GMT-0500 (GMT-05:00)
+[debug] [2019-11-04T22:45:33.336Z] ----------------------------------------------------------------------
+[debug] [2019-11-04T22:45:33.336Z] 
+[debug] [2019-11-04T22:45:33.346Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-11-04T22:45:33.347Z] > authorizing via signed-in user
+[debug] [2019-11-04T22:45:33.347Z] [iam] checking project xpectrum-node for permissions ["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2019-11-04T22:45:33.349Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/xpectrum-node:testIamPermissions  
+
+[debug] [2019-11-04T22:45:34.237Z] <<< HTTP RESPONSE 200
+[debug] [2019-11-04T22:45:34.240Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/xpectrum-node  
+ 
+[debug] [2019-11-04T22:45:34.593Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Deploying to 'xpectrum-node'...
+[info] 
+[info] i  deploying functions, hosting
+[debug] [2019-11-04T22:45:35.003Z] TypeError [ERR_INVALID_ARG_TYPE]: The "path" argument must be of type string. Received type undefined
+    at validateString (internal/validators.js:107:11)
+    at Object.join (path.js:372:7)
+    at Config.path (C:\Users\HP\AppData\Roaming\npm\node_modules\firebase-tools\lib\config.js:149:39)
+    at getChildEnvironment (C:\Users\HP\AppData\Roaming\npm\node_modules\firebase-tools\lib\deploy\lifecycleHooks.js:50:49)
+    at runTargetCommands (C:\Users\HP\AppData\Roaming\npm\node_modules\firebase-tools\lib\deploy\lifecycleHooks.js:71:14)
+    at C:\Users\HP\AppData\Roaming\npm\node_modules\firebase-tools\lib\deploy\lifecycleHooks.js:122:24
+    at processTicksAndRejections (internal/process/task_queues.js:85:5)
+[error] 
+[error] Error: An unexpected error has occurred.

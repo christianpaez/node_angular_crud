@@ -7,7 +7,7 @@ import { Item } from './items';
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
 };
-const apiUrl = 'http://localhost:3000'
+const apiUrl = 'https://xpectrum-backend.herokuapp.com'
 @Injectable({
   providedIn: 'root'
 })
